@@ -1,95 +1,126 @@
+"use client";
 import Image from "next/image";
 import styles from "./page.module.css";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [screenWidth, setScreenWidth] = useState(0);
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const pointers = [
+    {
+      id: 1,
+      text: "Start growing your influence right away—no waiting required!",
+    },
+    {
+      id: 2,
+      text: "Create viral TikToks and Reels step by step with easy-to-follow lessons",
+    },
+    { id: 3, text: "Use a Personal AI Worker to boost your content" },
+    {
+      id: 4,
+      text: "Learn from expert-led courses designed for aspiring influencers",
+    },
+  ];
+
+  return (
+    <div className={styles.mainLayout}>
+      <div className={styles.offer}>
+        <p>
+          🚀 <span className={styles.offerBold}>FRESH BEGINNINGS SALE:</span>{" "}
+          Extra 25% OFF, Limited Spots - start your journey today!
+        </p>
+      </div>
+      <div className={styles.navbar}>
+        <div className={styles.emptyDiv}></div>
+        <div className={styles.logoWrapper}>
+          <Image
+            src="/Group.svg"
+            alt="Logo"
+            fill
+            priority
+            sizes="(max-width: 768px) 105.38px, (min-width: 769px) 173px"
+            style={{ objectFit: "contain" }}
+          />
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <div className={styles.navlinks}>
+          <Link href="#about">About Us</Link>
+          <Link href="#contact">Contact</Link>
+        </div>
+        <div className={styles.menuToggle}>
           <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+            src="/Hamburger.svg"
+            alt="Menu Toggle"
+            width={20}
+            height={12}
+            priority
           />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
+        </div>
+      </div>
+      <div className={styles.content}>
+        <div className={styles.writings}>
+          <p className={styles.title}>
+            {screenWidth >= 1000 ? (
+              <>
+                Want to Turn Social Media Into a <br /> Profitable Career?
+              </>
+            ) : (
+              <>
+                Want to Turn Social Media <br /> Into a Profitable Career?
+              </>
+            )}
+          </p>
+          <p className={styles.subtitle}>
+            Discover your way to success <br />
+            with Fametonic:
+          </p>
+          <div className={styles.pointers}>
+            {pointers.map((item) => (
+              <p key={item.id} className={styles.points}>
+                <span className={styles.bullet}>✨</span> {item.text}
+              </p>
+            ))}
+          </div>
+          <div className={styles.startAndTermsContainer}>
+            <div className={styles.getStartedContainer}>
+              <button className={styles.getStartedBtn}>
+                GET STARTED <img src="/RightArrow.svg" />
+              </button>
+              <p className={styles.instruction}>
+                1-minute quiz for personalized Insights
+              </p>
+            </div>
+            <div className={styles.termsContainer}>
+              <p className={styles.policy}>
+                By clicking "Get Started", you agree with Terms and Conditions,
+                Privacy Policy, Subscription Terms
+              </p>
+              <p className={styles.rights}>
+                Fametonic 2025 ©All Rights Reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className={styles.heroImage}>
+          <img
+            src="/Mobile.svg"
+            alt="Mobile logo"
+            className={styles.imageInner}
           />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        </div>
+      </div>
     </div>
   );
 }
