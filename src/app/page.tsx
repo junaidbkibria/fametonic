@@ -104,8 +104,8 @@ export default function Home() {
             </div>
             <div className={styles.termsContainer}>
               <p className={styles.policy}>
-                By clicking "Get Started", you agree with Terms and Conditions,
-                Privacy Policy, Subscription Terms
+                By clicking &quot;Get Started&quot;, you agree with Terms and
+                Conditions, Privacy Policy, Subscription Terms
               </p>
               <p className={styles.rights}>
                 Fametonic 2025 ©All Rights Reserved.
